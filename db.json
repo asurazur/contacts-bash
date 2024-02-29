@@ -1,0 +1,13 @@
+{
+  "people":[    
+      {
+          "id": 1,
+          "name": "Kristian Davidson O. Azur",
+          "email": "asurazur@gmail.com",
+          "birthday": "2002-12-06",
+          "gender": "M",
+          "location": "Naga City",
+          "note": ""
+      }
+  ]
+}
