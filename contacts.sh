@@ -57,12 +57,9 @@ elif [[ $action == 3 ]]; then
     #CONFIRMATION
 elif [[ $action == 4 ]]; then
     echo "Delete"
-    #PROMPT ID
     read -p "Enter ID to delete: " id
-    #DELETE the element
     map "$id"
     actual_index=$?
-
     echo $json | jq -r ".people[$actual_index]"
     read -p "Are you sure to delete this (Y:Yes/ N:No): " flag 
     #To do: If not found, abort
@@ -73,8 +70,6 @@ elif [[ $action == 4 ]]; then
     else
         echo "Deletion aborted"
     fi
-    #Write to JSON FILE
-    #CONFIRMATION
 else
     "Invalid Input"
 fi
