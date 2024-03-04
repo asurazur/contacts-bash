@@ -9,6 +9,16 @@
       "gender": "Male",
       "location": "Naga City",
       "motto": "Kung magiging uuod ako mamahalin parin kita"
+    },
+    {
+      "id": 2,
+      "name": "Ierathel",
+      "gender": "Gabrielle",
+      "birthday": "A.",
+      "location": "Cresencio",
+      "email": "Female",
+      "number": "2002-08-24",
+      "motto": "Daraga,"
     }
   ]
 }
