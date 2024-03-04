@@ -104,7 +104,9 @@ if [[ $action == 1 ]]; then
 elif [[ $action == 2 ]]; then
     echo "Read"
     read -p "Enter ID to read: " id
-    actual_index=$(map_id_to_index "$id")
+    #Map ID to Index
+    actual_index=$(map_id_to_index "$id")]
+    #Check if ID exists
     if [[ $actual_index == "-1" ]]; then
         echo "$id not found"
     else 
@@ -122,10 +124,13 @@ elif [[ $action == 3 ]]; then
 elif [[ $action == 4 ]]; then
     echo "Delete"
     read -p "Enter ID to delete: " id
+    #Map ID to Index
     actual_index=$(map_id_to_index "$id")
+    #Check if ID exists
     if [[ $actual_index == "-1" ]]; then
         echo "$id not found"
     else 
+        #Delete Confirmation
         echo $json | jq -r ".people[$actual_index]"
         read -p "Are you sure to delete this (Y:Yes/ N:No): " flag 
         if [ "$flag" == "y" ] || [ "$flag" == "Y" ]; then
