@@ -1,13 +1,14 @@
 {
-  "people":[    
-      {
-          "id": 1,
-          "name": "Kristian Davidson O. Azur",
-          "email": "asurazur@gmail.com",
-          "birthday": "2002-12-06",
-          "gender": "M",
-          "location": "Naga City",
-          "note": ""
-      }
+  "people": [
+    {
+      "id": 1,
+      "name": "Kristian Davidson O. Azur",
+      "email": "asurazur@gmail.com",
+      "number": "09199720494",
+      "birthday": "2002-12-06",
+      "gender": "Male",
+      "location": "Naga City",
+      "motto": "Kung magiging uuod ako mamahalin parin kita"
+    }
   ]
 }
