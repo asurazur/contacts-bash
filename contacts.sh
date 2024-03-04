@@ -58,7 +58,21 @@ elif [[ $action == 3 ]]; then
 elif [[ $action == 4 ]]; then
     echo "Delete"
     #PROMPT ID
+    read -p "Enter ID to delete: " id
     #DELETE the element
+    map "$id"
+    actual_index=$?
+
+    echo $json | jq -r ".people[$actual_index]"
+    read -p "Are you sure to delete this (Y:Yes/ N:No): " flag 
+    #To do: If not found, abort
+    if [ "$flag" == "y" ] || [ "$flag" == "Y" ]; then
+        echo "ID == $id deleted successfully"
+        temp=$(jq ".people |= map(select(.id != 4))" db.json)
+        echo $temp > db.json
+    else
+        echo "Deletion aborted"
+    fi
     #Write to JSON FILE
     #CONFIRMATION
 else
