@@ -7,7 +7,7 @@
 
 # Function to get the index of a person by id
 function map_id_to_index() {
-    local index=$(jq -r --arg id "$id" '.people | map(.id) | index($id | tonumber)' "db.json")
+    local index=$("./jq" -r --arg id "$id" '.people | map(.id) | index($id | tonumber)' "db.json")
     if [[ "$index" == "null" ]]; then
         echo -1
     else
@@ -17,7 +17,7 @@ function map_id_to_index() {
 
 #Generate Unique ID
 function create_unique_id() {
-    local ids=($(jq -r '.people[].id' "db.json"))
+    local ids=($("./jq" -r '.people[].id' "db.json"))
     local largest=-1
     for i in "${ids[@]}"; do
         if [[ $largest -lt $i ]]; then
@@ -83,7 +83,7 @@ function add_person() {
     }"
     
     # Add the new person to the "people" array in the JSON file
-    echo | jq --argjson new_person "$new_person" '.people += [$new_person]' db.json > tmp.json
+    echo | "./jq" --argjson new_person "$new_person" '.people += [$new_person]' db.json > tmp.json
     mv tmp.json db.json
     echo "New person added with ID: $id"
 }
@@ -93,7 +93,7 @@ function read_contact() {
   	echo "Read Contact"
 	read -p "Option (0-All Contacts, 1-Single Contact): " -n 1 option; echo
     if [[ $option == 0 ]]; then
-        echo | jq -r '.people[]' db.json;
+        echo | "./jq" -r '.people[]' db.json;
     elif [[ $option == 1 ]]; then
         read -p "Enter ID to read: " id;
         #Map ID to Index
@@ -102,7 +102,7 @@ function read_contact() {
         if [[ $actual_index == "-1" ]]; then
             echo "$id not found"
         else 
-            echo $json | jq -r ".people[$actual_index]"
+            echo $json | "./jq" -r ".people[$actual_index]"
         fi
     else 
         echo "Invalid Argument"
@@ -122,7 +122,7 @@ function update_contact() {
         return
     else
         #UPDATE DATA
-        echo $json | jq -r ".people[$actual_index]"
+        echo $json | "./jq" -r ".people[$actual_index]"
         echo "Updating Instruction: (1: Name, 2: Email, 3: Number, 4: Birthday, 5: Gender, 6: Location, 7: Motto"
         #Guard Clause
         read -p "Choose Which to Update: " -n 1 option; echo
@@ -132,11 +132,11 @@ function update_contact() {
         fi
         attribute=$(get_attribute "$option")
         read -p "Enter the New $attribute: " new_attribute
-        old_attribute=$(echo $json | jq ".people[$actual_index].$attribute")
+        old_attribute=$(echo $json | "./jq" ".people[$actual_index].$attribute")
         #CONFIRMATION
         read -p "Are you sure to replace $old_attribute with $new_attribute (Y/y to confirm): " flag
         if [ "$flag" == "y" ] || [ "$flag" == "Y" ]; then
-            echo $json | jq ".people[$actual_index].$attribute=\"$new_attribute\"" > tmp.json
+            echo $json | "./jq" ".people[$actual_index].$attribute=\"$new_attribute\"" > tmp.json
             mv tmp.json db.json
             echo "$id.$attribute: $old_attribute -> $new_attribute"
         else
@@ -158,10 +158,10 @@ function delete_contact() {
         echo "$id not found"
     else 
         #Delete Confirmation
-        echo $json | jq -r ".people[$actual_index]"
+        echo $json | "./jq" -r ".people[$actual_index]"
         read -p "Are you sure to delete this (Y/y to confirm): " flag 
         if [ "$flag" == "y" ] || [ "$flag" == "Y" ]; then
-            echo $json | jq ".people |= map(select(.id != $id))" > tmp.json
+            echo $json | "./jq" ".people |= map(select(.id != $id))" > tmp.json
             mv tmp.json db.json
             echo "ID: $id Deleted successfully"
         else
@@ -172,7 +172,7 @@ function delete_contact() {
 
 #Main Function
 json=$(cat db.json)
-people_size=$(echo $json | jq -r '.people | length')
+people_size=$(echo $json | "./jq" -r '.people | length')
 echo Contact Management Program
 echo "Number of Contacts: $people_size"
 read -p "1:Create, 2:Read, 3:Update, 4:Delete: " -n 1 action; clear
