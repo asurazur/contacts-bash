@@ -1,5 +1,5 @@
 # contacts-bash
-CRUD Contacts with Bash and JSON
+CRUD Contacts with Bash and CSV
 
 ## Author
 [Kristian Davidson O. Azur](https://github.com/asurazur/)
@@ -10,10 +10,7 @@ _To get a local copy up and running follow these simple example steps._
 
 ### Prerequisites
 * BASH
-* jq
-  ```sh
-  sudo apt install jq
-  ```
+
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
@@ -22,10 +19,6 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    git clone https://github.com/asurazur/contacts-bash.git
    ```
-2. Install jq
-    ```sh
-    sudo apt install jq
-    ```
 ### Usage
 _To Run the Program do the following steps:_
 
